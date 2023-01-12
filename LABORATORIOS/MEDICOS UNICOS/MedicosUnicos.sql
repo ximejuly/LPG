@@ -1,6 +1,6 @@
 SELECT 
          RIGHT([p].[CodPais],2) AS PAIS
-		,[m].[Cdg_medico] AS CDG_MEDICO
+        ,[m].[Cdg_medico] AS CDG_MEDICO
         ,[m].[Nombre] AS NOMBRE_DOCTOR
         ,[m].[Domicilio] AS DOMICILIO
         ,[m].[Localidad] AS LOCALIDAD
