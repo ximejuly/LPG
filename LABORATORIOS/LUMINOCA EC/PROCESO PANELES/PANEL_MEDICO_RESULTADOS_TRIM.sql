@@ -36,7 +36,7 @@ SELECT
   JOIN [Unifica].[dbo].[Mercado.Producto]  AS [ma]
   ON [ma].[Producto]=[m].[Producto] 
 
-  JOIN [BDMedicosLuminovaPg].[dbo].[Periodo]  AS [pe]
+  RIGHT JOIN [BDMedicosLuminovaPg].[dbo].[Periodo]  AS [pe]
   ON [pe].[MesCupExp]=[m].[Periodo]
 
   
