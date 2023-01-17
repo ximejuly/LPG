@@ -32,8 +32,7 @@ SELECT
 			ON [fi].[Nom_bi]=[b].[Nom_bi]
 
 
-WHERE [m].[Pais]='EC' 
-AND [m].[Periodo]='TAM 10/22' 
+WHERE ([m].[Pais]='EC' AND [m].[Periodo]='TAM 10/22')
 
 GROUP BY   
            [b].[Cod_bi]
