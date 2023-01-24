@@ -1,41 +1,46 @@
 SELECT  
-             [v].[Pais]
-            ,[p].[Producto]
-            ,[p].[Marca]
-            ,[p].[SiglaLab]
-            ,[v].[Laboratorio]
+             [v].[Pais]          
+            ,[p].[Marca] 
+			 ,[p].[Producto]
+            ,[l].[Nombre]
+            ,[l].[SiglaLab]
             ,[p].[FormaFarmaceutica]
             ,[p].[ClaseTerapeutica]
-            ,ISNULL([p].[Molecula],'NO TIENE MOLECULA' )   AS Molecula
-            ,[v].[Apertura] AS [Especialidad]
+            ,ISNULL([p].[Molecula],'NO TIENE MOLECULA' )   AS Molecula          
             ,[v].[Año]
             ,[v].[Mes]
+            ,[p].[Laboratorio]
+            ,[p].[Origen]
             ,SUM([v].[Val]) AS Val
             
             
-FROM [dbo].[Mercado.Producto] [p]
-JOIN [Unifica].[dbo].[Mercado.Em] AS [v]
+FROM [Unifica].[dbo].[Mercado.Em] AS [v]
+
+LEFT JOIN [dbo].[Mercado.Producto] [p]
 ON   [p].[Producto]=[v].[Producto]
 
-WHERE [v].[Division]='ESP' 
-AND ([v].[Año] IN ('21','22')) 
-OR  ([v].[Año]='20' AND [v].[Mes]=' 11')
+LEFT JOIN [Unifica].[dbo].[MercadoLaboratorioRx] AS [l]
+ON   [p].[SiglaLab]=[l].[SiglaLab]
+
+WHERE ((([v].[Division]='ESP' AND [p].[Laboratorio]='LPG CA') AND [v].[Origen]='CA') AND ([v].[Año] IN ('21','22')  OR ([v].[Año]='20' AND [v].[Mes]=' 11'))) AND ( [v].[Val]<>0 )
+
 GROUP BY 
-             [v].[Pais]
-            ,[p].[Producto]
+             [v].[Pais]           
             ,[p].[Marca]
-            ,[p].[SiglaLab]
-            ,[v].[Laboratorio]
+			 ,[p].[Producto]
+            ,[l].[Nombre]
+            ,[l].[SiglaLab]
             ,[p].[FormaFarmaceutica]
             ,[p].[ClaseTerapeutica]
-            ,[p].[Molecula]
-            ,[v].[Apertura]
+            ,[p].[Molecula]        
             ,[v].[Año]
-            ,[v].[Mes]
+            ,[v].[Mes]          
+            ,[p].[Laboratorio]
+            ,[p].[Origen]
+
 
 ORDER  BY [v].[Mes],[v].[Año]
-
-
+ 
 
 
 
